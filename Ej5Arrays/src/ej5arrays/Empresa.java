@@ -1,7 +1,7 @@
 package ej5arrays;
 //Importamos nuestros metodos ya creados
 import metodosclases.Fecha;
-import metodosclases.Textos;d
+import metodosclases.Textos;
 /**
  *
  * @author Alvar
@@ -10,8 +10,8 @@ public class Empresa {
     Cliente [] clientes;
     Descuento [] descuentos;
 
-    public Empresa(int nClientes) {
-        clientes = new Cliente[nClientes];
+    public Empresa(int nclientes) {
+        clientes = new Cliente[nclientes];
         
         //Aqui lo que haremos sera crear la tabla de descuentos
         descuentos = new Descuento[] {
@@ -26,17 +26,17 @@ public class Empresa {
         //Declaramos las variables de los clientes
         String cif, nombre;
         int dven;
-        Fecha fecha;
+        Fecha fechaFra;
         float importe;
         
         //Pedimos los datos de los clientes
-        for(int ncliente = 0; ncliente<clientes.length; ncliente++){
+        for(int ncliente = 0; ncliente<clientes.length; ncliente++){ 
             cif=metodosclases.Textos.pedirString("Dime tu CIF");
             nombre=metodosclases.Textos.pedirString("Dime tu nombre");
             dven=metodosclases.Numero.pedirNumero("Dime los dias de vencimiento", 0);
-            fecha=metodosclases.Textos.pedirFecha("Dime la fecha");
+            fechaFra = Textos.pedirFecha("Dime la fecha");
             importe=metodosclases.Numero.pedirNumeroReal("Dime el importe de la factura", 0);
-            clientes[ncliente]=new Cliente(cif, nombre, fecha, dven, importe);
+            clientes[ncliente]=new Cliente(cif, nombre, fechaFra, dven, importe);
         }
     }
     
@@ -45,6 +45,18 @@ public class Empresa {
         Fecha fhoy = new Fecha();
         System.out.println("INFORME DE FACTURAS");
         System.out.println("Fecha: " + fhoy.fechaCompletaLetra());
+        System.out.println("CIF \t NOMBRE\t FECHA FACTURA\t IMPORTE BRUTO \t FECHA VENCIMIENTO" +
+                "\t IMPORTE NETO");
+        for(int ncliente = 0; ncliente < clientes.length; ncliente++){
+            Fecha vencimiento = new Fecha(clientes[ncliente].getFechaFra().getDia(),
+                    clientes[ncliente].getFechaFra().getMes(),
+                    clientes[ncliente].getFechaFra().getAnno());
+            vencimiento.calcularVencimiento(clientes[ncliente].getDiasVen());
+            System.out.println(clientes[ncliente].getCif());
+            System.out.println(clientes[ncliente].getNombre());
+            System.out.println( clientes[ncliente].getFechaFra().fechaCompleta());
+            System.out.println("\t"+clientes[ncliente].getImporte());
+        }
     }
     
 }
