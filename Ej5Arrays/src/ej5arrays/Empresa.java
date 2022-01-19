@@ -1,7 +1,7 @@
 package ej5arrays;
 //Importamos nuestros metodos ya creados
 import metodosclases.Fecha;
-import metodosclases.Textos;
+import metodosclases.Textos;d
 /**
  *
  * @author Alvar
